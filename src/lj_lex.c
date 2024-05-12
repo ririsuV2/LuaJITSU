@@ -360,9 +360,18 @@ static LexToken lex_scan(LexState *ls, TValue *tv)
     case '~':
       lex_next(ls);
       if (ls->c != '=') return '~'; else { lex_next(ls); return TK_ne; }
+    case '!':
+      lex_next(ls);
+      if (ls->c != '=') return TK_not; else { lex_next(ls); return TK_ne; }
     case ':':
       lex_next(ls);
       if (ls->c != ':') return ':'; else { lex_next(ls); return TK_label; }
+    case '&':
+      lex_next(ls);
+      if (ls->c != '&') return '&'; else { lex_next(ls); return TK_and; }
+    case '|':
+      lex_next(ls);
+      if (ls->c != '|') return '|'; else { lex_next(ls); return TK_or; }
     case '"':
     case '\'':
       lex_string(ls, tv);
